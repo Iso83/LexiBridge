@@ -1,4 +1,4 @@
-<!-- AGENTS_STANDARDS_VERSION: 1.1.0 -->
+<!-- AGENTS_STANDARDS_VERSION: 1.1.2 -->
 
 # Instructies voor C/C++-projecten
 
@@ -146,6 +146,10 @@ private:
     bool validate() const;
 };
 ```
+
+### Include hygiene
+
+Controleer na codewijzigingen de includes in de betrokken headers en sources. Verwijder onnodige `#include`-regels en uitgecommentarieerde includes. Include benodigde headers rechtstreeks; vertrouw niet op transitieve includes. Behoud includes die nodig zijn voor de ondersteunde configuraties en platforms.
 
 ### Header en source blijven gesynchroniseerd
 
@@ -402,6 +406,7 @@ Controleer vóór afronding:
 
 - De opgedragen stap werkt via het echte uitvoeringspad en voldoet aan `Task.md`.
 - De code volgt naamgeving, classindeling, header/source-volgorde en witruimteregels.
+- Includes zijn na de laatste codewijziging gecontroleerd: onnodige en uitgecommentarieerde includes zijn verwijderd, benodigde headers worden rechtstreeks geïncludeerd en noodzakelijke includes zijn behouden.
 - Headers bevatten hoogstens drie eigen type-definities en concepten staan in passende namespaces/subfolders. Gedeelde interne API gebruikt `<project_default_namespace>::Internal::<optioneel>`. Structurele refactors en renames zijn vastgelegd in `doc/refactor.md`.
 - Build is geslaagd en de CTest-opleverrun na de laatste codewijziging is groen, met nul falende tests en alle verplichte tests uitgevoerd. Anders blijft de taak onvolledig/geblokkeerd en wordt dat expliciet gemeld.
 - `extern/`, submoduleverwijzingen en gebruikerswijzigingen zijn behouden.

@@ -18,7 +18,7 @@ file(GLOB_RECURSE MODULE_PUBLIC_HEADERS CONFIGURE_DEPENDS
 # Target
 # ============================================================================
 
-string(REPLACE "/" "_" MODULE_NAME "engine/translator")
+string(REPLACE "/" "_" MODULE_NAME "core/translator")
 
 set(MODULE_TARGET "${PROJECT_NAME}_${MODULE_NAME}")
 
@@ -53,10 +53,10 @@ target_compile_features(${MODULE_TARGET}
 # IDE organization
 # ============================================================================
 
-cppcmake_project_set_ide_folder(${MODULE_TARGET} "engine/translator")
+cppcmake_project_set_ide_folder(${MODULE_TARGET} "core/translator")
 
 source_group(
-    TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}/engine/translator"
+    TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}/core/translator"
     PREFIX "Include"
     FILES
         ${MODULE_PUBLIC_HEADERS}
@@ -74,11 +74,11 @@ source_group(
 # Dependencies
 # ============================================================================
 
-# target_link_libraries(${MODULE_TARGET}
-#     PUBLIC
-#
-#     PRIVATE
-# )
+target_link_libraries(${MODULE_TARGET}
+    PRIVATE
+        ${BERGAMOT}
+        ${ZLIB}
+)
 
 # ============================================================================
 # Tests
@@ -86,13 +86,34 @@ source_group(
 
 cppcmake_test_add(
     NAME
-        Test_${MODULE_TARGET}
+        Test_${MODULE_TARGET}_Translator
     TARGET
         ${MODULE_TARGET}
     MODULE
-        "engine/translator"
+        "core/translator"
     SOURCES
-        tests/Test_Translator.cpp
+        tests/Translator.cpp
     INCLUDE_DIRECTORIES
         ${CMAKE_CURRENT_SOURCE_DIR}/src
+    COMPILE_DEFINITIONS
+        "LEXIBRIDGE_TEST_DATA_DIR=\"${LEXIBRIDGE_DATA_DIR}\""
+        "LEXIBRIDGE_TEST_SCRATCH_DIR=\"${CMAKE_CURRENT_BINARY_DIR}/invalid-model-test\""
+    LABELS
+        integration
+        models
+        offline
+)
+
+cppcmake_test_add(
+    NAME
+        Test_${MODULE_TARGET}_BergamotService
+    TARGET
+        ${BERGAMOT}
+    MODULE
+        "core/translator"
+    SOURCES
+        tests/BergamotService.cpp
+    LABELS
+        regression
+        lifecycle
 )

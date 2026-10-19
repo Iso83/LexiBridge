@@ -1,0 +1,12 @@
+models: [model.bin]
+vocabs: [vocab.spm, vocab.spm]
+shortlist: [lex.bin, false]
+beam-size: 1
+normalize: 1.0
+word-penalty: 0
+max-length-break: 128
+mini-batch-words: 1024
+workspace: 128
+gemm-precision: int8shiftAlphaAll
+ssplit-mode: paragraph
+quiet: true
