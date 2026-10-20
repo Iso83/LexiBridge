@@ -15,8 +15,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-set(LEXIBRIDGE_DATA_DIR "${PROJECT_BINARY_DIR}/data" CACHE PATH "Local translation model directory")
+set(LEXIBRIDGE_DATA_DIR "${PROJECT_BINARY_DIR}/data" CACHE PATH "Local translation model and dictionary directory")
 set(LEXIBRIDGE_MODEL_ARCHIVE_DIR "" CACHE PATH "Optional directory containing the six downloaded model gzip files")
+set(LEXIBRIDGE_WORDNET_ARCHIVE "" CACHE FILEPATH "Optional local OEWN 2025 WNDB zip archive")
 
 # =========================================================
 # CppCMake
@@ -62,4 +63,5 @@ cppdependencies_bergamot(BERGAMOT)
 
 cppcmake_module_add(core/translator)
 cppcmake_module_add(tools/models)
+cppcmake_module_add(tools/wordnet)
 cppcmake_module_add(apps/translator)

@@ -61,14 +61,21 @@ Voer fase 1 uit en lever op voor review. Start fase 2 pas na opdracht.
 
 ## Fase 2 — Engelse synoniemen
 
-- [ ] Gebruik Open English WordNet als uitgangspunt en kies een dataformaat dat rechtstreeks met C/C++ verwerkt kan worden.
-- [ ] Voeg datavoorbereiding via CMake toe; gebruik alleen indien nodig een kleine C/C++-hulptool voor conversie.
-- [ ] Implementeer lokale lookup in de engine en voeg `translator synonyms --word <woord> --data-dir <pad>` toe aan de bestaande CLI.
-- [ ] Toon synoniemen per betekenis, met woordsoort en definitie waar beschikbaar. Normaliseer hoofdletters en omliggende whitespace; verwijder duplicaten binnen dezelfde betekenis.
-- [ ] Onderscheid 'geen resultaten' van ontbrekende of onbruikbare woordenboekdata. Verzin geen labels zoals 'formeler' wanneer de bron die niet levert.
-- [ ] Voeg inhoudelijke tests met echte woordenboekdata toe voor lookup, meerdere betekenissen, normalisatie, onbekende woorden en foutafhandeling.
-- [ ] Werk helptekst en README bij met datavoorbereiding, voorbeelden, bron, versie en vereiste attributies.
-- [ ] Demonstreer offline lookup via de CLI en voer CTest uit, inclusief de vertaaltests uit fase 1. Rond fase 2 alleen af bij een groene relevante suite.
+> Status 20 oktober 2026: uitgevoerd op basis van de gereviewde commit d124fd4.
+> OEWN 2025 WNDB wordt rechtstreeks verwerkt. Automatische download, lokale
+> archiefvoorbereiding, hergebruik en herstel zijn uitgevoerd. De Release-build
+> met GCC 14.2.0/CMake 4.0.3 en alle zes CTest-suites zijn groen, inclusief echte
+> WordNet-data en de vertaaltests uit fase 1. Offline CLI-lookup is gedemonstreerd.
+> Windows/MSVC is in deze fase niet uitgevoerd. Zie doc/phase2-validation.md.
+
+- [x] Gebruik Open English WordNet als uitgangspunt en kies een dataformaat dat rechtstreeks met C/C++ verwerkt kan worden.
+- [x] Voeg datavoorbereiding via CMake toe; gebruik alleen indien nodig een kleine C/C++-hulptool voor conversie.
+- [x] Implementeer lokale lookup in de engine en voeg `translator synonyms --word <woord> --data-dir <pad>` toe aan de bestaande CLI.
+- [x] Toon synoniemen per betekenis, met woordsoort en definitie waar beschikbaar. Normaliseer hoofdletters en omliggende whitespace; verwijder duplicaten binnen dezelfde betekenis.
+- [x] Onderscheid 'geen resultaten' van ontbrekende of onbruikbare woordenboekdata. Verzin geen labels zoals 'formeler' wanneer de bron die niet levert.
+- [x] Voeg inhoudelijke tests met echte woordenboekdata toe voor lookup, meerdere betekenissen, normalisatie, onbekende woorden en foutafhandeling.
+- [x] Werk helptekst en README bij met datavoorbereiding, voorbeelden, bron, versie en vereiste attributies.
+- [x] Demonstreer offline lookup via de CLI en voer CTest uit, inclusief de vertaaltests uit fase 1. Rond fase 2 alleen af bij een groene relevante suite.
 
 ## Oplevering per fase
 

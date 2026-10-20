@@ -14,6 +14,35 @@ private:
     std::ostringstream m_errors;
 
 public:
+    int synonyms() {
+        const std::string data = LEXIBRIDGE_TEST_DATA_DIR;
+        CPPTEST_ASSERT(invoke({"synonyms", "--word", " \tBaNK\n", "--data-dir", data}) == 0);
+        CPPTEST_ASSERT(m_output.str().find("[noun]") != std::string::npos);
+        CPPTEST_ASSERT(m_output.str().find("[verb]") != std::string::npos);
+        CPPTEST_ASSERT(m_output.str().find("financial institution") != std::string::npos);
+        CPPTEST_ASSERT(m_output.str().find("banking company") != std::string::npos);
+        CPPTEST_ASSERT(m_output.str().find("money box") != std::string::npos);
+        CPPTEST_ASSERT(m_errors.str().empty());
+
+        CPPTEST_ASSERT(invoke({"synonyms", "--word", "lexibridgezzzzunknown", "--data-dir", data}) == 0);
+        CPPTEST_ASSERT(m_output.str() == "No WordNet results.\n");
+        CPPTEST_ASSERT(m_errors.str().empty());
+
+        CPPTEST_ASSERT(invoke({"synonyms", "--help"}) == 0);
+        CPPTEST_ASSERT(m_output.str().find("--word") != std::string::npos);
+        CPPTEST_ASSERT(m_output.str().find("--data-dir") != std::string::npos);
+
+        CPPTEST_ASSERT(fails({"synonyms", "--data-dir", data}));
+        CPPTEST_ASSERT(fails({"synonyms", "--word", "bank"}));
+        CPPTEST_ASSERT(fails({"synonyms", "--word", "   ", "--data-dir", data}));
+        CPPTEST_ASSERT(fails({"synonyms", "--word", "bank", "--data-dir", ""}));
+        CPPTEST_ASSERT(fails({"synonyms", "--word", "bank", "--data-dir", LEXIBRIDGE_TEST_INPUT}));
+        CPPTEST_ASSERT(fails({"synonyms", "--word", "lexibridgezzzzunknown", "--data-dir", LEXIBRIDGE_TEST_INPUT}));
+        CPPTEST_ASSERT(fails({"synonyms", "--word", "bank", "--data-dir", data, "--from", "nl"}));
+        CPPTEST_ASSERT(fails({"synonyms", "--word", "bank", "--data-dir", data, "translate"}));
+        return 0;
+    }
+
     int models() {
         const std::string data = LEXIBRIDGE_TEST_DATA_DIR;
         CPPTEST_ASSERT(
@@ -73,8 +102,9 @@ private:
 
 int main() {
     ApplicationTests tests;
-    if (tests.errors() != 0)
-        return 1;
+
+    CPPTEST_RUN(tests.errors);
+    CPPTEST_RUN(tests.synonyms);
 
     return tests.models();
 }

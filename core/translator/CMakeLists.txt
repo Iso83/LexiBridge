@@ -86,6 +86,24 @@ target_link_libraries(${MODULE_TARGET}
 
 cppcmake_test_add(
     NAME
+        Test_${MODULE_TARGET}_Dictionary
+    TARGET
+        ${MODULE_TARGET}
+    MODULE
+        "core/translator"
+    SOURCES
+        tests/Dictionary.cpp
+    COMPILE_DEFINITIONS
+        "LEXIBRIDGE_TEST_DATA_DIR=\"${LEXIBRIDGE_DATA_DIR}\""
+        "LEXIBRIDGE_WORDNET_TEST_SCRATCH=\"${CMAKE_CURRENT_BINARY_DIR}/invalid-wordnet-test\""
+    LABELS
+        integration
+        wordnet
+        offline
+)
+
+cppcmake_test_add(
+    NAME
         Test_${MODULE_TARGET}_Translator
     TARGET
         ${MODULE_TARGET}

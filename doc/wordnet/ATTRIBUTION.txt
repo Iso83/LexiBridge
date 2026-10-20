@@ -1,0 +1,15 @@
+Open English WordNet 2025, Open English WordNet Team, Copyright 2019-present.
+https://github.com/globalwordnet/english-wordnet/releases/tag/2025-edition
+https://en-word.net/
+Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+Derived from Princeton University WordNet under the WordNet License.
+WordNet 3.1 Copyright 2011 by Princeton University. All rights reserved.
+See LICENSE.md and WNDB_License.txt for the complete license notices.
+
+LexiBridge uses the unmodified data.noun, data.verb, data.adj and data.adv
+files from english-wordnet-2025-index.sense-fixed.zip (2026-06-26).
+Displayed lemmas have WNDB underscores replaced with spaces and adjective
+position markers removed. Lookup ignores ASCII case and surrounding whitespace.
+Glosses and grouping into synsets are retained. No register labels are inferred.
